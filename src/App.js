@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import NavScrollExample from './Components/Appbar'
+import Herosec from './Components/Herosec'
+import { useGoogleOneTapLogin } from 'react-google-one-tap-login';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function App() {
+
+export default function App() {
+  useGoogleOneTapLogin({
+    onError: error => console.log(error),
+    onSuccess: response => {
+      toast.success("User logged in");
+    },
+    googleAccountConfigs: {
+      client_id: '972994991215-m2ukou91nme4cuti07kk69u1mo0q3445.apps.googleusercontent.com'
+    },
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    <ToastContainer />
+    <NavScrollExample/>
+    <Herosec/>
+    </>
+  )
 }
-
-export default App;
